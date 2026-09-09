@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Local, Utc};
 use serde::{Deserialize, Serialize};
 use std::net::IpAddr;
 
@@ -70,7 +70,7 @@ impl PingResultDto {
     pub fn to_json_lite(&self) -> String {
         format!(
             "{{\"UtcTime\":\"{:?}\",\"WorkerId\":{},\"Protocol\":\"{}\",\"TargetIp\":\"{}\",\"TargetPort\":{},\"SourceIp\":\"{}\",\"SourcePort\":{},\"IsWarmup\":{},\"IsSucceeded\":{},\"RttInMs\":{:.2},\"IsTimedOut\":{},\"PreparationError\":\"{}\",\"PingError\":\"{}\",\"HandshakeError\":\"{}\",\"DisconnectError\":\"{}\"}}",
-            self.utc_time,
+            self.utc_time.with_timezone(&Local).format("%Y-%m-%d %H:%M:%S").to_string),
             self.worker_id,
             self.protocol,
             self.target_ip,
@@ -91,7 +91,7 @@ impl PingResultDto {
     pub fn to_csv_lite(&self) -> String {
         format!(
             "{:?},{},{},{},{},{},{},{},{},{:.2},{},\"{}\",\"{}\",\"{}\",\"{}\"",
-            self.utc_time,
+            self.utc_time.with_timezone(&Local).format("%Y-%m-%d %H:%M:%S").to_string(),
             self.worker_id,
             self.protocol,
             self.target_ip,
