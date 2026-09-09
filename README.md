@@ -1,3 +1,6 @@
+<img width="1799" height="1049" alt="图片" src="https://github.com/user-attachments/assets/a519217e-0d80-41a4-ba6f-8cf1f4451072" />
+
+
 # Rnp - A simple layer 4 ping tool for cloud.
 ![Rnp](https://github.com/r12f/rnp/blob/main/assets/logo.png?raw=true)
 
