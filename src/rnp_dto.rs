@@ -69,7 +69,7 @@ impl PingResultDto {
 
     pub fn to_json_lite(&self) -> String {
     format!(
-        "{{\"UtcTime\":\"{}\",\"WorkerId\":{},\"Protocol\":\"{}\",\"TargetIP\":\"{}\",\"TargetPort\":\"{}\",\"SourceIP\":\"{}\",\"SourcePort\":\"{}\",\"Succeeded\":{},\"Error\":\"{}\",\"RoundTripTimeInMs\":{:.2},\"ErrorMessage\":\"{}\",\"TargetName\":\"{}\",\"SourceName\":\"{}\",\"DisconnectError\":\"{}\",\"DisconnectErrorMessage\":\"{}\"}}",
+        "{{\"UtcTime\":\"{}\",\"WorkerId\":{},\"Protocol\":\"{}\",\"TargetIp\":\"{}\",\"TargetPort\":{},\"SourceIp\":\"{}\",\"SourcePort\":{},\"IsWarmup\":{},\"IsSucceeded\":{},\"RttInMs\":{:.2},\"IsTimedOut\":{},\"PreparationError\":\"{}\",\"PingError\":\"{}\",\"HandshakeError\":\"{}\",\"DisconnectError\":\"{}\"}}",
         self.utc_time.with_timezone(&Local).format("%Y-%m-%d %H:%M:%S%.3f").to_string(),
         self.worker_id,
         self.protocol,
@@ -77,16 +77,16 @@ impl PingResultDto {
         self.target_port,
         self.source_ip,
         self.source_port,
-        self.result.succeeded,
-        self.result.error,
-        self.result.round_trip_time_in_ms,
-        self.result.error_message,
-        self.target_name,
-        self.source_name,
-        self.result.disconnect_error,
-        self.result.disconnect_error_message,
-        )
-    }
+        self.is_warmup,
+        self.is_succeeded,
+        self.rtt_in_ms,
+        self.is_timed_out,
+        self.preparation_error,
+        self.ping_error,
+        self.handshake_error,
+        self.disconnect_error,
+    )
+}
 
     pub fn to_csv_lite(&self) -> String {
     format!(
@@ -98,14 +98,14 @@ impl PingResultDto {
         self.target_port,
         self.source_ip,
         self.source_port,
-        self.result.succeeded,
-        self.result.error,
-        self.result.round_trip_time_in_ms,
-        self.result.error_message,
-        self.target_name,
-        self.source_name,
-        self.result.disconnect_error,
-        self.result.disconnect_error_message,
-       )
-   }
+        self.is_warmup,
+        self.is_succeeded,
+        self.rtt_in_ms,
+        self.is_timed_out,
+        self.preparation_error,
+        self.ping_error,
+        self.handshake_error,
+        self.disconnect_error,
+    )
+}
 }
